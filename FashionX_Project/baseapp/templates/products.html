@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Hello, world!</title>
+</head>
+
+<body>
+  {% block content %}
+  <div class="container">
+      Product Count : {{ prod_count }}
+      Time  {% now "jS F Y H:i" %}
+    <h1> List of Products</h1>
+    {% for productobj in raja %}
+    {# {% lorem 3 p random %} #}
+    {% verbatim myblock %}
+    Avoid template rendering via the {% verbatim %}{% endverbatim %} block.
+{% endverbatim myblock %}
+
+    <br><br>
+    <div class="card">
+      <div class="card-header">
+    
+        {{ productobj.product_name | title }}
+      </div>
+      <div class="card-body">
+        <small> Category : {{ productobj.product_category }}</small>
+        <h5 class="card-title"> Date : {{ productobj.product_published_date |date:"dS F Y" }}</h5>
+        <p class="muted small"> Volume : {{ productobj.product_volume }}</p>
+        <img src="{{ productobj.product_image.url }}" width="500" height="300" />
+        <p class="card-text"> {{ productobj.product_description | truncatewords_html:20 | safe }}</p>
+        <a href="{% url 'list_products_details' productobj.id  %}" class="btn btn-primary">View details</a>
+      </div>
+    </div>
+    <br><br>
+    {% endfor %}
+
+  </div>
+
+  {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+{% for message in messages %}
+{% if message.tags %} 
+{% endif %}
+{% endfor %}
+
+
+  {% endblock %}
+
+</body>
+
+</html>

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Enter order details</title>
+  </head>
+  <body>
+    {% block content %}
+    <div class="container">
+    <h2> Order Reciept Upload</h2>
+    <div class="container">
+        <br><br>
+     <form method="POST">
+         {% csrf_token %}
+         {{ form.as_p }}
+         <input type="submit" value="upload" \>
+     </form>
+    
+    </div>
+  </div>
+    {% endblock %}
+ 
+  </body>
+</html>

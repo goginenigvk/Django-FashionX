@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Hello, world!</title>
+</head>
+
+<body>
+  {% block content %}
+  <div class="container">
+    Product Count : {{ prod_count }}
+    <h1> List of Orders</h1>
+   <div class="row">
+    {% for order in orderpost %}
+       <div class="col-lg-4 col-sm-6 mb-4">
+         <div class="card">
+            <div class="card-header">    
+               Order ID #{{ order.order_id  }}
+            </div>
+            <div class="card-body">
+                <small> Order By  : {{ order.order_by }}</small>
+                <p>Order location : {{ order.order_location }} </p>
+            </div>
+          </div>
+      </div>
+      {% if forloop.counter|divisibleby:3 %}
+    </div>
+    <div class="row">
+    {% endif %} 
+    {% endfor %}
+    </div>
+  </div>
+
+
+
+<div class="container">
+    <div  class="row" style="padding-top: 4%; padding-bottom: 6%;">
+      <nav aria-label="Page navigation example" style="padding-left:3%;">   
+       {% if orderpost.has_other_pages %}   
+          <ul class="pagination">  
+            {% if orderpost.has_previous %}     
+              <li><a href="?page={{ orderpost.previous_page_number}}" class="page-link">&laquo;</a></li>
+              {% else %}
+              <li class="page-item disabled page-link"><span>&laquo;</span></li>
+              {% endif %}
+
+              {% for i in orderpost.paginator.page_range %}
+                {% if orderpost.number == i %}
+              <li class="page-item active"><a href="#" class="page-link">{{i}}
+                       <span class="sr-only">(current)</span></a></li>
+                 {% else %}
+              <li><a href="?page={{ i }}" class="page-link">{{i}}</a></li>
+               {% endif %}
+               {% endfor %}
+
+
+              {% if orderpost.has_next %}
+              <li><a href="?page={{ orderpost.next_page_number}}" class="page-link">&raquo;</a></li>
+              {% else %}
+              <li class="page-item disabled page-link"><span>&raquo;</span></li>
+              {% endif %}
+           </ul>
+          {% endif %}
+       </nav>
+  </div>
+
+  {% endblock %}
+</div>
+</body>
+
+</html>

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Hello, world!</title>
+  </head>
+  <body>
+    {% block content %}
+        <div class="container">
+            
+            {% for productobj in product_info %}
+            <br><br>
+            <div class="card">
+                <div class="card-header">
+              <h1>   {{ productobj.product_name | title}} </h1>
+                </div>
+                <div class="card-body">
+                  
+                  <small> Category : {{ productobj.product_category }}</small>
+                  <h5 class="card-title"> Cost : {{ productobj.product_cost | add:"100"}}</h5>
+                  <h5 class="card-title"> Size : {{ productobj.product_size_choices }}</h5>
+                  <h5 class="card-title"> Date : {{ productobj.product_published_date }}</h5>
+                   <p class="muted small"> Volume : {{ productobj.product_volume }}</p>
+                   <img src="{{ productobj.product_image.url }}" width="500" height="300"/>
+                  <p class="card-text"> {{ productobj.product_description |safe |linenumbers  }} </p>
+                </div>
+                <hr>
+              </div>
+              <br><br>
+              {% endfor %}
+
+        </div>
+
+    {% endblock %}
+ 
+  </body>
+</html>

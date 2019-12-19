@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Hello, world!</title>
+</head>
+
+<body>
+  {% block content %}
+  <div class="container">
+      <br><br><br>
+  <table class="table table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">S.No</th>
+        <th scope="col">Query</th>
+        <th scope="col">Result</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td> All Product Count</td>
+        <td>{{ all_product_count }}</td>
+      </tr>
+      <tr>
+        <th scope="row">2</th>
+        <td> Max product cost</td>
+        <td>{{ all_product_max_cost.values }}</td>
+      </tr>
+      <tr>
+            <th scope="row">3</th>
+            <td> Avg Product Cost</td>
+            <td>{{ all_product_avg_cost.values }}</td>
+        </tr>
+        <tr>
+                <th scope="row">4</th>
+                <td> Second largest Row Data</td>
+                <td>{{ second_largest_row.product_name }}</td>
+        </tr>
+
+        <tr>
+                <th scope="row">5</th>
+                <td> Product less than 3k cost</td>
+                <td>{{ get_cost_less_than_3000 }}</td>
+        </tr>
+
+        <tr>
+                <th scope="row">6</th>
+                <td> Get Product name starts with 'U' and Product catgeory starts with 'T'</td>
+                <td>{{ get_prodcost_prodname }}</td>
+        </tr>
+
+        <tr>
+                <th scope="row">7</th>
+                <td> Distinct Products </td>
+                <td>{{ get_disctint_product_name }}</td>
+        </tr>
+        
+
+        
+
+
+    </tbody>
+  </table>
+  
+
+</div>
+  {% endblock %}
+
+</body>
+
+</html>
